@@ -37,9 +37,7 @@ while ($row = mysql_fetch_assoc($result)) {
 
     print('<td>');
     print('<form action="data.php" method="post">');
-    foreach ($row as $e) {
-    	printf('<input type="hidden" name="data[]" value="%s">', $e);
-    }
+    printf('<input type="hidden" name="id" value="%s">', $row['id']);
 	print('<input type="submit" name="mode" value="更新">');
 	print('</td>');
 

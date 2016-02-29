@@ -4,7 +4,6 @@ $link = db_connect();
 
 if(isset($_POST['mode'])){
 	$mode = $_POST['mode'];
-	$data = $_POST['data'];
 }else{
 	die('Could not find any modes.');
 }
