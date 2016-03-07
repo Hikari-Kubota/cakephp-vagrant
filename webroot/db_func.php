@@ -1,8 +1,8 @@
 <?php
-require_once('db_config.php');
+require_once('config.php');
 
 function db_connect(){
-	$dsn = sprintf("mysql:dbname=%s;host=%s;", DB_NAME, DB_HOST, 
+	$dsn = sprintf("mysql:dbname=%s;host=%s;charset=utf8;", DB_NAME, DB_HOST, 
 			array(
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_EMULATE_PREPARES => false)

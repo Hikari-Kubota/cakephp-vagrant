@@ -1,4 +1,5 @@
 <?php
+require_once('config.php');
 require_once('db_func.php');
 $pdo = db_connect();
 
@@ -13,15 +14,15 @@ if(isset($_POST['mode'])){
             "address" => $_POST['address'],
             );
 
-    if($_POST['mode']=='登録'){
+    if($_POST['mode'] == M_INSERT){
         db_insert($pdo, $data);
 
-    }else if($_POST['mode']=='更新'){
+    }else if($_POST['mode'] == M_UPDATE){
         db_update($pdo, $data);
 
-    }else if($_POST['mode']=='削除'){
+    }else if($_POST['mode'] == M_DELETE){
         db_delete($pdo, $_POST['id']);
-        
+
     }
 }
 ?>
@@ -36,7 +37,8 @@ if(isset($_POST['mode'])){
 <h1>一覧｜名簿管理アプリ</h1>
 
 <form action="input.php" method="post">
-<input type="submit" name="mode" value="登録">
+<?php printf('<input type="hidden" name="mode" value="%s">', M_INSERT); ?>
+<input type="submit" value="登録">
 </form>
 <table border="1">
 <tr>
@@ -61,14 +63,16 @@ foreach($pdo->query($sql) as $row){
     print('<td>');
     print('<form action="input.php" method="post">');
     printf('<input type="hidden" name="id" value="%s">', $row['id']);
-	print('<input type="submit" name="mode" value="更新">');
+    printf('<input type="hidden" name="mode" value="%s">', M_UPDATE);
+	print('<input type="submit" value="更新">');
     print('</form>');
 	print('</td>');
 
 	print('<td>');
     print('<form action="index.php" method="post">');
     printf('<input type="hidden" name="id" value="%s">', $row['id']);
-    print('<input type="submit" name="mode" value="削除"></form>');
+    printf('<input type="hidden" name="mode" value="%s">', M_DELETE);
+    print('<input type="submit" value="削除"></form>');
     print('</form>');
     print('</td>');
     print('</tr>');

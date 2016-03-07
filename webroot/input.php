@@ -1,4 +1,5 @@
 <?php
+require_once('config.php');
 require_once('db_func.php');
 $pdo = db_connect();
 
@@ -8,7 +9,7 @@ if(!isset($_POST['mode'])){
 
 $mode = $_POST['mode'];
 
-if($_POST['mode']=="更新"){
+if($_POST['mode'] == M_UPDATE){
 	$sql = "SELECT * FROM list WHERE id = :id";
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute(array("id" => $_POST['id']));
@@ -21,10 +22,10 @@ if($_POST['mode']=="更新"){
 <html>
 <head>
 <meta charset="utf-8" />
-<title><?php print($mode); ?>｜名簿管理アプリ</title>
+<title><?php print($MODE[$mode]); ?>｜名簿管理アプリ</title>
 </head>
 <body>
-<h1><?php print($mode); ?>｜名簿管理アプリ</h1>
+<h1><?php print($MODE[$mode]); ?>｜名簿管理アプリ</h1>
 
 <form action="index.php" method="post">
 ID：<input type="text" name="id" size="15" disabled="true" value=<?php echo $res['id']; ?>>
@@ -39,7 +40,7 @@ ID：<input type="text" name="id" size="15" disabled="true" value=<?php echo $re
 郵便番号：<input type="text" name="post1" size="3"  value=<?php echo $res['post1']; ?>> - <input type="text" name="post2" size="4"  value=<?php echo $res['post2']; ?>><br>
 住所：<input type="text" name="address" size="40"  value=<?php echo $res['address']; ?>><br>
 
-<input type="submit" name="mode" value=<?php print($mode); ?>>
+<input type="submit" name="mode" value=<?php print($MODE[$mode]); ?>>
 </form>
 
 </body>
