@@ -2,21 +2,46 @@
 require_once('db_config.php');
 
 function db_connect(){
-	$link = mysql_connect(DB_HOST, DB_USER, DB_PASS);
-	if (!$link) {
-    	die('Could not connect '.DB_HOST.'.<br>'.mysql_error());
-	}
+	$dsn = sprintf("mysql:dbname=%s;host=%s;", DB_NAME, DB_HOST, 
+			array(
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_EMULATE_PREPARES => false)
+        	);
 
-	if(!mysql_select_db(DB_NAME)) {
-        die('Could not use '.DB_NAME.'.<br>'.mysql_error());
-    }
+	try{
+		$pdo = new PDO($dsn, DB_USER, DB_PASS);
+	}catch(Exeption $e){
+		print("Error: ".$getMessage());
+		die();
+	}
  
-    return $link;
+    return $pdo;
 }
 
-function db_close($link){
-	if(!mysql_close($link)){
-		die('Couled not close '.DB_HOST.'.');
-	}
+function db_insert($pdo, $data){
+	$sql = 'INSERT INTO list (first_name, last_name, first_name_kana, last_name_kana, 
+							  post1, post2, address)
+			VALUES (:first_name, :last_name, :first_name_kana, :last_name_kana, 
+					:post1, :post2, :address)';
+	$stmt = $pdo->prepare($sql);
+    $stmt->execute($data);
+}
+
+function db_update($pdo, $data){
+	$sql = 'UPDATE list SET first_name=:first_name, 
+							last_name=:last_name,
+							first_name_kana=:first_name_kana,
+							last_name_kana=:last_name_kana, 
+							post1=:post1,
+							post2=:post2,
+							address=:address';
+	$stmt = $pdo->prepare($sql);
+    $stmt->execute($data);
+}
+
+function db_delete($pdo, $id){
+	$sql = 'DELETE FROM list WHERE id = :id';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(array(':id' => $id));
 }
 ?>
