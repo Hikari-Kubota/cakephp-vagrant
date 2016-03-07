@@ -8,14 +8,6 @@ if(!isset($_POST['mode'])){
 
 $mode = $_POST['mode'];
 
-/*$data = array(
-			"id" => "", "updated" = "",
-            "first_name" => "", "last_name" => "",
-            "first_name_kana" => "", "last_name_kana" => "",
-            "post1" => "", "post2" => "",
-            "address" => "",
-            );*/
-
 if($_POST['mode']=="更新"){
 	$sql = "SELECT * FROM list WHERE id = :id";
 	$stmt = $pdo->prepare($sql);
