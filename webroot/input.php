@@ -23,6 +23,13 @@ if($_POST['mode'] == M_UPDATE){
 <head>
 <meta charset="utf-8">
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<script type="text/javascript">
+    const M_INSERT = <?php print(M_INSERT); ?>;
+    const M_UPDATE = <?php print(M_UPDATE); ?>;
+    const M_DELETE = <?php print(M_DELETE); ?>;
+    const M_SEARCH = <?php print(M_SEARCH); ?>;
+</script>
+<script type="text/javascript" src="js/script.js"></script>
 <title><?php print($MODE[$mode]); ?>｜名簿管理アプリ</title>
 </head>
 <body>
@@ -33,7 +40,9 @@ if($_POST['mode'] == M_UPDATE){
 </header>
 
 <nav>
-	
+    <div id="btn_to_list" onclick="post('index.php',{});">
+        一覧表示
+    </div>
 </nav>
 
 <div id="main">

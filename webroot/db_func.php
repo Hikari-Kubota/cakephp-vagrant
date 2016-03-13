@@ -34,7 +34,8 @@ function db_update($pdo, $data){
 							last_name_kana=:last_name_kana, 
 							post1=:post1,
 							post2=:post2,
-							address=:address';
+							address=:address
+							WHERE id=:id';
 	$stmt = $pdo->prepare($sql);
     $stmt->execute($data);
 }
@@ -44,4 +45,26 @@ function db_delete($pdo, $id){
     $stmt = $pdo->prepare($sql);
     $stmt->execute(array(':id' => $id));
 }
+
+function db_select($pdo, $id){
+	$sql = "SELECT * FROM list WHERE id = :id";
+	$stmt = $pdo->prepare($sql);
+	$stmt->execute(array("id" => $_POST['id']));
+	return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ?>

@@ -1,9 +1,11 @@
 /*Global parameters*/
 var selected_id;
+var selected_name;
 
-
-function edit(){
+function edit(id, name){
 	/* Set parameters */
+	selected_id = id;
+	selected_name = name;
 	var arrow_size_width = 50;
 	var arrow_size_height = 20;
 	var edit_box_height = 60;
@@ -21,12 +23,12 @@ function edit(){
 }
 
 function btn_update(){
-	var data = {"mode":M_UPDATE, "id":selected_id};
-	post("input.php", data);
+	var data = {"mode":M_FILLFORM, "id":selected_id};
+	post("index.php", data);
 }
 
 function btn_delete(){
-	if(window.confirm("ID:"+selected_id+" のデータを削除しますか？")){
+	if(window.confirm("ID:"+selected_id+" "+selected_name+"さんのデータを削除しますか？")){
 		var data = {"mode":M_DELETE, "id":selected_id};
 		post("index.php", data);
 	}else{
@@ -59,6 +61,17 @@ function post(action, data){
 	form.submit();
 }
 
+function fill_form(form_info){
+	document.getElementById("i_id").value = form_info["id"];
+	document.getElementById("i_last_name").value = form_info["last_name"];
+	document.getElementById("i_last_name_kana").value = form_info["last_name_kana"];
+	document.getElementById("i_first_name").value = form_info["first_name"];
+	document.getElementById("i_first_name_kana").value = form_info["first_name_kana"];
+	document.getElementById("i_post1").value = form_info["post1"];
+	document.getElementById("i_post2").value = form_info["post2"];
+	document.getElementById("i_address").value = form_info["address"];
+
+}
 
 
 

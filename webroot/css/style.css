@@ -1,8 +1,13 @@
 @charset "UTF-8";
 
+/* common */
 body {
 	font-size: 16px;
 	font-family: "メイリオ",Meiryo,"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",Osaka,"ＭＳ Ｐゴシック","MS PGothic",sans-serif;
+}
+
+h1 {
+	margin: 20px 0 10px auto;
 }
 
 /* layout */
@@ -18,6 +23,13 @@ header {
 	border-bottom: 3px solid #285943;
 }
 
+nav {
+	width: 960px;
+	height: 40px;
+	background: #FFFFFF;
+	margin: 5px 0 20px;
+}
+
 #main {
 	width: 960px;
 	margin: 0 auto;
@@ -28,16 +40,51 @@ footer {
 	margin: 0 auto;
 }
 
+/* menu (nav) */
+
+
+/* input form */
+#i_id {
+	width: 100px;
+}
+
+#i_first_name {
+	width: 100px;
+}
+
+#i_last_name {
+	width: 100px;
+}
+
+#i_first_name_kana {
+	width: 100px;
+}
+
+#i_last_name_kana {
+	width: 100px;
+}
+
+#i_post1 {
+	width: 30px;
+}
+
+#i_post2 {
+	width: 58px;
+}
+
+#i_address {
+	width: 393px;
+}
+
+#i_submit {
+	width: 100px;
+}
+
 /* table */
 table {
 	width: 960px;
 	border-collapse: collapse;
 	border-spacing: 10px 5px;
-}
-
-th {
-	color: #FFFFFF;
-	background: #285943;
 }
 
 tr:nth-child(odd) {
@@ -49,12 +96,19 @@ tr:hover {
 	cursor: pointer;
 }
 
+th {
+	color: #FFFFFF;
+	background: #285943;
+	cursor: default;
+
+}
+
 td {
 	border-bottom: 1px dashed #285943;
 }
 
 
-/* others */
+/* edit_box */
 #edit_box {
 	width: 300px;
 	height: 60px;
