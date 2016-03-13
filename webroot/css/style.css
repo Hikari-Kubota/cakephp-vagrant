@@ -1,0 +1,122 @@
+@charset "UTF-8";
+
+body {
+	font-size: 16px;
+	font-family: "メイリオ",Meiryo,"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",Osaka,"ＭＳ Ｐゴシック","MS PGothic",sans-serif;
+}
+
+/* layout */
+#wrapper {
+	width: 960px;
+	margin: 0 auto;
+}
+
+header {
+	width: 960px;
+	margin: 0 auto;
+
+	border-bottom: 3px solid #285943;
+}
+
+#main {
+	width: 960px;
+	margin: 0 auto;
+}
+
+footer {
+	width: 960px;
+	margin: 0 auto;
+}
+
+/* table */
+table {
+	width: 960px;
+	border-collapse: collapse;
+	border-spacing: 10px 5px;
+}
+
+th {
+	color: #FFFFFF;
+	background: #285943;
+}
+
+tr:nth-child(odd) {
+	background: #D7FFF1;
+}
+
+tr:hover {
+	background: #FDD692;
+	cursor: pointer;
+}
+
+td {
+	border-bottom: 1px dashed #285943;
+}
+
+
+/* others */
+#edit_box {
+	width: 300px;
+	height: 60px;
+	position: absolute;
+	background: rgba(255, 255, 255, 0.9);
+	border: double #285943;
+	display: none;
+}
+
+#edit_box_arrow {
+	position: absolute;
+	border-top : solid 20px transparent;
+	border-bottom: solid 20px transparent;
+	border-right: solid 50px #285943;
+	display: none;
+}
+
+#btns {
+	width: 300px;
+	margin: 0 auto;
+}
+
+#btn_update, #btn_delete {
+	width: 50px;
+	height: 25px;
+	float: left;
+	border: 2px solid #285943;
+	border-radius: 20px;
+	margin: 10px;
+	padding: 5px;
+	text-align: center;
+	background: #FFFFFF;
+}
+
+#btn_cancel {
+	width: 90px;
+	height: 25px;
+	float: left;
+	border: 2px solid #285943;
+	border-radius: 20px;
+	margin: 10px;
+	padding: 5px;
+	text-align: center;
+	background: #FFFFFF;
+
+}
+
+#btn_update:hover, #btn_delete:hover, #btn_cancel:hover {
+	background: #FDD692;
+	cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

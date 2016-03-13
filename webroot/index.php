@@ -28,56 +28,86 @@ if(isset($_POST['mode'])){
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-<meta charset="utf-8" />
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script type="text/javascript">
+    const M_INSERT = <?php print(M_INSERT); ?>;
+    const M_UPDATE = <?php print(M_UPDATE); ?>;
+    const M_DELETE = <?php print(M_DELETE); ?>;
+    const M_SEARCH = <?php print(M_SEARCH); ?>;
+</script>
+<script type="text/javascript" src="js/script.js"></script>
 <title>一覧｜名簿管理アプリ</title>
 </head>
 <body>
-<h1>一覧｜名簿管理アプリ</h1>
+<div id="wrapper">
 
-<form action="input.php" method="post">
-<?php printf('<input type="hidden" name="mode" value="%s">', M_INSERT); ?>
-<input type="submit" value="登録">
-</form>
-<table border="1">
-<tr>
-	<th>ID</th><th>姓</th><th>名</th><th>姓（かな）</th><th>名（かな）</th>
-	<th>郵便番号</th><th>住所</th><th>最終更新日</th><th>更新</th><th>削除</th>
-</tr>
-<?php
-$sql = "SELECT * from list";
-foreach($pdo->query($sql) as $row){
-	print('<tr>');
-    printf('<td>%s</td>', $row['id']);
-    printf('<td>%s</td>', $row['last_name']);
-    printf('<td>%s</td>', $row['first_name']);
-    printf('<td>%s</td>', $row['last_name_kana']);
-    printf('<td>%s</td>', $row['first_name_kana']);
-    printf('<td>%s-%s</td>', $row['post1'], $row['post2']);
-    printf('<td>%s</td>', $row['address']);
+<header>
+    <h1>一覧｜名簿管理アプリ</h1>
 
-    $dt = strtotime($row['updated']);
-    printf('<td>%s</td>', date('Y-m-d',$dt));
+</header>
 
-    print('<td>');
-    print('<form action="input.php" method="post">');
-    printf('<input type="hidden" name="id" value="%s">', $row['id']);
-    printf('<input type="hidden" name="mode" value="%s">', M_UPDATE);
-	print('<input type="submit" value="更新">');
-    print('</form>');
-	print('</td>');
+<nav>
+    <form action="input.php" method="post">
+    <?php printf('<input type="hidden" name="mode" value="%s">', M_INSERT); ?>
+    <input type="submit" value="登録">
+    </form>  
+</nav>
 
-	print('<td>');
-    print('<form action="index.php" method="post">');
-    printf('<input type="hidden" name="id" value="%s">', $row['id']);
-    printf('<input type="hidden" name="mode" value="%s">', M_DELETE);
-    print('<input type="submit" value="削除"></form>');
-    print('</form>');
-    print('</td>');
-    print('</tr>');
-}
-?>
-</table>
+<div id="main">
+    <table>
+    <tr>
+    	<th>ID</th><th>氏名</th><th>ふりがな</th>
+    	<th>郵便番号</th><th>住所</th><th>最終更新日</th>
+        <!-- <th>更新</th><th>削除</th>-->
+    </tr>
+    <?php
+    $sql = "SELECT * from list";
+    $count = 0;
+    foreach($pdo->query($sql) as $row){
+
+        print('<tr onclick="edit();">');
+
+        printf('<td>%s</td>', $row['id']);
+        printf('<td>%s %s</td>', $row['last_name'], $row['first_name']);
+        printf('<td>%s %s</td>', $row['last_name_kana'], $row['first_name_kana']);
+        printf('<td>%s-%s</td>', $row['post1'], $row['post2']);
+        printf('<td>%s</td>', $row['address']);
+
+        $dt = strtotime($row['updated']);
+        printf('<td>%s</td>', date('Y-m-d',$dt));
+
+        print('</tr>');
+
+        $count++;
+    }
+    ?>
+    </table>
+<!-- #main --> </div>
+
+<footer>
+</footer>
+
+<div id="edit_box">
+    <div id="btn_update" onclick="btn_update();">
+        更新
+    </div>
+    <div id="btn_delete" onclick="btn_delete()";>
+        削除
+    </div>
+    <div id="btn_cancel" onclick="btn_cancel();">
+        キャンセル
+    </div>
+</div>
+<div id ="edit_box_arrow"></div>
+
+<!-- #wrapper --> </div>
 </body>
+
+
+
+
+
 </html>

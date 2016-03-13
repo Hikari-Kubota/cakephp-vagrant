@@ -19,29 +19,44 @@ if($_POST['mode'] == M_UPDATE){
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-<meta charset="utf-8" />
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="css/style.css">
 <title><?php print($MODE[$mode]); ?>｜名簿管理アプリ</title>
 </head>
 <body>
-<h1><?php print($MODE[$mode]); ?>｜名簿管理アプリ</h1>
+<div id="wrapper">
 
-<form action="index.php" method="post">
-ID：<input type="text" name="id" size="15" disabled="true" value=<?php echo $res['id']; ?>>
-最終更新日：<input type="text" name="updated" size="15" disabled="true"  value=<?php echo $res['updated']; ?>><br>
+<header>
+	<h1><?php print($MODE[$mode]); ?>｜名簿管理アプリ</h1>
+</header>
 
-姓：<input type="text" name="last_name" size="15"  value=<?php echo $res['last_name']; ?>>
-姓（かな）：<input type="text" name="last_name_kana" size="15"  value=<?php echo $res['last_name_kana']; ?>><br>
+<nav>
+	
+</nav>
 
-名：<input type="text" name="first_name" size="15"  value=<?php echo $res['first_name']; ?>>
-名（かな）：<input type="text" name="first_name_kana" size="15"  value=<?php echo $res['first_name_kana']; ?>><br>
+<div id="main">
+	<form action="index.php" method="post">
+	ID：<input type="text" name="id" size="15" disabled="true" value=<?php echo $res['id']; ?>>
+	最終更新日：<input type="text" name="updated" size="15" disabled="true"  value=<?php echo $res['updated']; ?>><br>
 
-郵便番号：<input type="text" name="post1" size="3"  value=<?php echo $res['post1']; ?>> - <input type="text" name="post2" size="4"  value=<?php echo $res['post2']; ?>><br>
-住所：<input type="text" name="address" size="40"  value=<?php echo $res['address']; ?>><br>
+	姓：<input type="text" name="last_name" size="15"  value=<?php echo $res['last_name']; ?>>
+	姓（かな）：<input type="text" name="last_name_kana" size="15"  value=<?php echo $res['last_name_kana']; ?>><br>
 
-<input type="submit" name="mode" value=<?php print($MODE[$mode]); ?>>
-</form>
+	名：<input type="text" name="first_name" size="15"  value=<?php echo $res['first_name']; ?>>
+	名（かな）：<input type="text" name="first_name_kana" size="15"  value=<?php echo $res['first_name_kana']; ?>><br>
 
+	郵便番号：<input type="text" name="post1" size="3"  value=<?php echo $res['post1']; ?>> - <input type="text" name="post2" size="4"  value=<?php echo $res['post2']; ?>><br>
+	住所：<input type="text" name="address" size="40"  value=<?php echo $res['address']; ?>><br>
+
+	<input type="submit" name="mode" value=<?php print($MODE[$mode]); ?>>
+	</form>
+<!-- #main --> </div>
+
+<footer>
+</footer>
+
+<!-- #wrapper --> </div>
 </body>
 </html>
