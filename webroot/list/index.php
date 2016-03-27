@@ -43,9 +43,12 @@ if(isset($_POST['mode'])){
     const M_FILLFORM= <?php print(M_FILLFORM); ?>;
 </script>
 <script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/jquery-2.2.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.autoKana.js"></script>
+<script type="text/javascript" src="js/jquery.jpostal.js"></script>
 <title>名簿管理アプリ</title>
 </head>
-<body>
+<body onload="document.input_form.last_name.focus();">
 <div id="wrapper">
 
 <header>
@@ -54,26 +57,58 @@ if(isset($_POST['mode'])){
 
 <nav>
     <div id="input_box">
-        <form id="input_form" action="index.php" method="post">
+        <form id="input_form" name="input_form" action="index.php" method="post">
+            <table align="left">
+            <tr>
+            <td>
             <!-- ID */ -->
-            ID <input id="i_id" type="text" name="id" readonly="true">
+            <label>ID</label>
+            </td>
+            <td>
+            <input id="i_id" type="text" name="id" readonly="true">
+            </td>
+            </tr>
 
-            <!-- 氏名 -->
-            氏名 <input id="i_last_name" type="text" name="last_name">
-            <input id="i_first_name" type="text" name="first_name">
-
+            <tr>
+            <td>
             <!-- ふりがな -->
-            ふりがな <input id="i_last_name_kana" type="text" name="last_name_kana">
-            <input id="i_first_name_kana" type="text" name="first_name_kana">
+            <label>ふりがな</label>
+            </td>
+            <td>
+            <input id="i_last_name_kana" type="text" name="last_name_kana" pattern="^[ぁ-ん]+$" title="'ひらがな'で入力してください">
+            <input id="i_first_name_kana" type="text" name="first_name_kana" pattern="^[ぁ-ん]+$" title="'ひらがな'で入力してください">
+            </td>
 
-            <br>
-
+            <td>
             <!-- 郵便番号 -->
-            〒 <input id="i_post1" type="text" name="post1"> -
-            <input id="i_post2" type="text" name="post2">
+            <label>〒</label>
+            </td>
+            <td>
+            <input id="i_post1" type="text" name="post1" pattern="\d{3}" title="3桁の数字を入力してください" tabindex="3"> -
+            <input id="i_post2" type="text" name="post2" pattern="\d{4}" title="4桁の数字を入力してください" tabindex="4">
+            </td>
+            <!-- 送信 -->
+            <?php $s_value = $mode == M_FILLFORM ? $MODE[M_UPDATE] : "新規".$MODE[M_INSERT]; ?>
+            <td>
+            <input id="i_submit" type="submit" value="<?php print($s_value); ?>">
+            </td>
+            <tr>
+            <td>
+            <!-- 氏名 -->
+            <label>氏名</label>
+            </td>
+            <td>
+            <input id="i_last_name" type="text" name="last_name" pattern=".{1,}" title="'姓'を入力してください" tabindex="1">
+            <input id="i_first_name" type="text" name="first_name" pattern=".{1,}" title="'名'を入力してください" tabindex="2">
+            </td>
 
+            <td>
             <!-- 住所 -->
-            住所 <input id="i_address" type="text" name="address">
+            <label>住所</label>
+            </td>
+            <td colspan="2">
+            <input id="i_address" type="text" name="address" pattern=".{1,}" title="住所を入力してください" tabindex="5">
+            </td>
 
             <!-- mode -->
             <?php $m_value = $mode == M_FILLFORM ? M_UPDATE : M_INSERT ?>
@@ -82,10 +117,59 @@ if(isset($_POST['mode'])){
             <!-- page -->
             <input id="i_page" type="hidden" name="page" value="<?php print($_REQUEST["page"]); ?>">
 
-            <!-- 送信 -->
-            <?php $s_value = $mode == M_FILLFORM ? $MODE[M_UPDATE] : "新規".$MODE[M_INSERT]; ?>
-            <input id="i_submit" type="submit" value="<?php print($s_value); ?>">
+            </tr>
+            </table>
         </form>
+        <form id="i_search_form" name="search_input_form" action="index.php" method="post">
+        <table align="right">
+        <tr>
+        <td>
+        <input id="i_seach_mode" type="hidden" name="mode" value="<?php print(M_SEARCH); ?>">
+        <input id="i_search" name="search" type="text">
+        </td>
+        <td>
+        <input id="i_search_btn" type="submit" value="検索">
+        </td>
+        </tr>
+        <tr>
+        <td align="right" colspan="2">表示件数
+        <select name="n_disp">
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="60">60</option>
+        <option value="100">100</option>
+        <option value="200">200</option>
+        </select>
+        </td>
+        </tr>
+        </table>
+        </form>
+        <script type="text/javascript">
+                /* ふりがなの自動補完 */
+                $(function() {
+                    $.fn.autoKana('#i_last_name', '#i_last_name_kana', {
+                        katakana : false  //true：カタカナ、false：ひらがな（デフォルト）
+                    });
+                });
+                $(function() {
+                    $.fn.autoKana('#i_first_name', '#i_first_name_kana', {
+                        katakana : false  //true：カタカナ、false：ひらがな（デフォルト）
+                    });
+                });
+
+                /* 郵便番号 -> 住所の自動補完 */
+                $('#postcode2').jpostal({
+                        postcode : [
+                                '#i_post1',
+                                '#i_post2'
+                        ],
+                        address : {
+                                '#i_address': '%3%4%5%6%7', 
+                        }
+                });
+        </script>
         <?php 
             if($mode == M_FILLFORM){
                 print('<script type="text/javascript">');

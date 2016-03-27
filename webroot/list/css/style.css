@@ -25,7 +25,7 @@ header {
 
 nav {
 	width: 960px;
-	height: 40px;
+	height: 80px;
 	background: #FFFFFF;
 	margin: 5px 0 20px;
 }
@@ -75,11 +75,11 @@ footer {
 }
 
 #i_post2 {
-	width: 58px;
+	width: 50px;
 }
 
 #i_address {
-	width: 393px;
+	width: 300px;
 }
 
 #i_submit {
@@ -87,29 +87,29 @@ footer {
 }
 
 /* table */
-table {
+#main table {
 	width: 960px;
 	border-collapse: collapse;
 	border-spacing: 10px 5px;
 }
 
-tr:nth-child(odd) {
+#main tr:nth-child(odd) {
 	background: #D7FFF1;
 }
 
-tr:hover {
+#main tr:hover {
 	background: #FDD692;
 	cursor: pointer;
 }
 
-th {
+#main th {
 	color: #FFFFFF;
 	background: #285943;
 	cursor: default;
 
 }
 
-td {
+#main td {
 	border-bottom: 1px dashed #285943;
 }
 

@@ -66,7 +66,6 @@ function post(action, data){
 	form.submit();
 }
 
-
 function fill_form(form_info){
 	document.getElementById("i_id").value = form_info["id"];
 	document.getElementById("i_last_name").value = form_info["last_name"];
@@ -78,8 +77,6 @@ function fill_form(form_info){
 	document.getElementById("i_address").value = form_info["address"];
 
 }
-
-
 
 
 
