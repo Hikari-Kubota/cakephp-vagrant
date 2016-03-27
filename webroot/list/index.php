@@ -141,6 +141,8 @@ if(isset($_POST['mode'])){
         <option value="60">60</option>
         <option value="100">100</option>
         <option value="200">200</option>
+        <option value="全件">全件</option>
+
         </select>
         </td>
         </tr>
